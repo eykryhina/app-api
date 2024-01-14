@@ -4,7 +4,7 @@ const findToDeleteTransaction = require("./transaction/findToDeleteTransaction")
 const findTransaction = require("./transaction/findTransaction");
 
 let comand;
-let step = 0;
+let step = 1;
 let data = {};
 let code;
 
@@ -44,7 +44,7 @@ const create = (i, bot, msg) => {
         data.sendMoneyCount = msg.text;
         bot.sendMessage(
           chatId,
-          "введите сумму которую ''получит'' мамонт в формате '12345 USD'"
+          "введите сумму которую получит получатель в формате '12345 USD'"
         );
       }
       break;
@@ -81,14 +81,19 @@ const create = (i, bot, msg) => {
     case 8:
       if (!validateCardNumber(msg.text)) {
         step -= 1;
-        bot.sendMessage(chatId, "Номер карты введен с ошибкой или являеться недействительным. Введите правельный номер карты. вводите без пробелов.")
+        bot.sendMessage(
+          chatId,
+          "Номер карты введен с ошибкой или являеться недействительным. Введите правельный номер карты. вводите без пробелов."
+        );
       } else {
         data.recipientDetails = msg.text;
-        bot.sendMessage(chatId, "введите номер получателя. Вводите так как он должен отображаться в приложении.");
+        bot.sendMessage(
+          chatId,
+          "введите номер получателя. Вводите так как он должен отображаться в приложении."
+        );
       }
       break;
   }
-
   step += 1;
 };
 
@@ -102,7 +107,8 @@ const messageInBot = (bot, msg) => {
     case "/create":
       comand = "create";
       data = {};
-      create(0, bot, msg);
+      step = 0;
+      create(step, bot, msg);
       break;
     case "/link":
       bot.sendMessage(
