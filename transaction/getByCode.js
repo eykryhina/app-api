@@ -9,7 +9,6 @@ const getByCode = async (req, res, next) => {
     if (transaction) {
       res.status(200).json(transaction);
     } else {
-      console.log("qwerty");
       res
         .status(404)
         .json({ message: "transaaction not found" });

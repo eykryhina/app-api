@@ -271,4 +271,4 @@ function luhnCheck(val) {
   return sum % 10 === 0;
 }
 
-module.exports = { messageInBot, buttonKlick };
+module.exports = { messageInBot, buttonKlick};
